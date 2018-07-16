@@ -1,0 +1,20 @@
+Explanation of my train of thought.
+
+I have used Vue.js because I am more familiar with it and for a quick technical test like this in a short period of time, it's always easier to use tools you've used recently (same stack as Original). For the components I have used a simple yet elegant library called Buefy, it's a couple of Vue components sitting on top of Bulma, a pretty useful CSS framework.
+
+For the Solidity part, I have separated storage and core as two contracts, so that I can always change the core without losing data in the storage. Of course the storage would need a little bit more methods to not miss on any data that would be needed in the future or make it upgradable in some other way.
+
+I have added some tests on the Smart Contract, very basic ones like :
+- Verifying that a review is inserted correctly
+- Verifying that the upvote without tip is working
+- Verifying that the upvote with a tip is transferring the funds accordingly.
+
+There are a thousand more tests that could be added, mostly testing edge cases, and also some error checking in the solidity contract with require. For example requiring that a review has a title and a content. For this test, I assumed that reviews have just a ui test with content length > 10, etc.
+
+A couple modifications that could enough storage cost / gas cost would be to limit the Title and Author name to a byte32 in Solidity storage, that would help reduce the cost of creating a review.
+
+I couldn't deploy the smart contract to Kovan as I couldn't get Ethers from the faucet in time but I've deployed it to the Ropsten network using Infura.
+
+The truffle.js contains code that has to be replaced by your keys, namely ".env" that should have the private key of your wallet used in the deployment, and the other is in truffle.js file, it's the Infura key. Not needed if you have a Kovan / Ropsten node already up and running obviously.
+
+Let me know if you have any questions!
